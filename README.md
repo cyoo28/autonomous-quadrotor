@@ -1,1 +1,17 @@
-# autonomous-quadrotor
+# Autonomous Quadrotor
+There are 2 projects in this repo. The first project sought to develop an autonomous quadrotor that could navigate a real-world environment. The second project sought to simulate a quadrotor and analyze how state estimation affects planning and control. This was completed as course projects in March and April 2023.
+
+## Problem Statement
+For the first project, a Crazyflie quadrotor was required to navigate through an environment and around various barriers to land in 3 different locations. A virtual map containing the locations of every obstacle and landing zone was provided. Therefore, an algorithm needed to be designed that could properly plan and execute a safe path through the environment using the given map.
+
+For the second project, a simulated quadrotor was required to navigate a virtual environment. However, the quadrotor would not have ground-truth states containing perfect information about its location and the location of obstacles in the environment. Instead, the quadrotor would need to use visual intertial odometry to determine its own location and would also need to sense the obstacles in the environment using on-board sensors. This performance would then be compared to a quadrotor that has perfect information about its environment.
+
+## Solution Methodology
+For the first project, the quadrotor algorithm utilized a PD geometric controller, an A* path planner, and a minimum-snap trajectory optimizer. The algorithm was first tested in simulation before being implemented on the actual quadrotor. The next step to testing the algorithm was to verify that the controller worked properly and that the quadrotor was able to properly reach and maintain a specified altitude. Once the controller's performance was verified, the path planning and execution could be evaluated by having the quadrotor navigate through the real-world environment.
+
+For the second project, 2 models were compared to properly analyze the effect of state estimation vs ground-truth states. The first model was a basic model that relied on a constant velocity controller. The second model is an improved version that uses a minimum-snap controller. Both models would have to navigate through an environment to reach the desired destination without colliding with any obstacles.
+
+## Results
+For the first project, the quadrotor could safely control itself to reach a specified location and could also effectively navigate the real-world environment without colliding with any obstacles. The code for this project can be reviewed in the code subdirectory in the "Map Navigation Testing" subdirectory. For a more detailed explanation, please refer to [Crazyflie Experimental Report.pdf](https://github.com/cyoo28/autonomous-quadrotor/blob/main/Map%20Navigation%20Testing/Crazyflie%20Experimental%20Report.pdf). 
+
+For the second project, using estimated states in place of ground-truth states introduced noise to the controller. The constant velocity controller was unable to account for this error and was unable to navigate through the environment without crashing. On the other hand, the minimum-snap controller was much more robust and could effectively navigate through the environment. The code for this project can be reviewed in the code subdirectory in the "State Estimation Simulation" subdirectory. For a more detailed explanation, please refer to [Drone Simulation Report.pdf](https://github.com/cyoo28/autonomous-quadrotor/blob/main/State%20Estimation%20Simulation/Drone%20Simulation%20Report.pdf).
